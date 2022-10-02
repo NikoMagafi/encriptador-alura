@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encriptador de Texto</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+       
+    </header>
+    <main>
+        <div class="contenedor">
+            <div class="principal">
+                <img class="imglogo" src="imagenes/logo.png">
+
+                <textarea  name=""  id="msj" cols="80" rows="12" class="input-padron" placeholder="Ingresa el texto aquí" required></textarea>
+                
+            </div>
+            <div class="sidebar">
+           
+                <img id="imgsearch" src="imagenes/img_encrip.png">
+
+                <p id="Texto_1">No se ha encontrado ningún texto. </p>
+                <p id="Texto_2">Ingresa el texto que deseas encriptar o desencriptar en la sección izquierda. </p>
+
+                <p id="ans_" ></p>
+  
+            </div>
+          </div>
+        <div class="botones">
+            <button id="encriptar" onclick="hide_img_encrip()">Encriptar</button>
+
+            <button id="desencriptar" onclick="desencrip()">Desencriptar</button>
+
+            <button id="copiar" onclick="copiar('ans_')">Copiar</button>
+        </div>
+    </main>
+
+
+
+    <script>
+        
+        //Esto es para ocultar lo que ya teniamos en pantalla de la imagen owo y encriptar. 
+        function hide_img_encrip(){
+            var img_h = document.getElementById('imgsearch');
+            var txt_h_1 = document.getElementById('Texto_1');
+            var txt_h_2 = document.getElementById('Texto_2');
+            
+            img_h.style.display = 'none';
+            txt_h_1.style.display = 'none';
+            txt_h_2.style.display = 'none';
+            
+            //Esto es para mostrar el texto que ya tenemos en el mensaje a encriptar. 
+            var msj_encrip = document.getElementById("msj").value;
+            msj_encrip = msj_encrip.toLowerCase();
+
+
+
+            const encrip = eliminarVocales(msj_encrip);
+            document.getElementById("ans_").innerHTML = encrip;
+
+        }
+
+        //Aquí encriptamos, declarando un conjunto de variables y metiendolas a una función de sustitución
+        function eliminarVocales(str) {
+            var mapObj = {
+                a:"ai",
+                e:"enter",
+                i:"imes",
+                o:"ober",
+                u:"ufat",
+            };
+            let resultado = str.replace(/[aeiou]/g, function(matched) { return mapObj[matched];})
+            return resultado
+        
+        }
+
+        //Función de Desencriptar. 
+        function desencrip(){
+            //Esto es para agarrar el mensaje que vamos a desencriptar
+            var msj_desencrip = document.getElementById("msj").value;
+            
+            const desencrip = recuperarVocales(msj_desencrip);
+            document.getElementById("ans_").innerHTML = desencrip;
+        }
+
+        //Función para sustituir los valores de encriptación por valores originales
+        function recuperarVocales(str) {
+            let resultado = str.replace(/enter/igm, "e");
+    
+            resultado = resultado.replace(/ober/igm, "o")
+            resultado = resultado.replace(/imes/igm, "i")
+            resultado = resultado.replace(/ai/igm, "a")
+            resultado = resultado.replace(/ufat/igm, "u")
+               
+            return resultado
+        
+        }
+
+        //Función de copiar
+        function copiar(id_elemento) {
+            var aux = document.createElement("input");
+            aux.setAttribute("value", document.getElementById(id_elemento).innerHTML);
+            document.body.appendChild(aux);
+            aux.select();
+            document.execCommand("copy");
+            document.body.removeChild(aux);
+            alert("Elemento copiado");
+
+        }
+
+
+    </script>
+
+</body>
+</html>
