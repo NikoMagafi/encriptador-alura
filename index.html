@@ -84,6 +84,16 @@
 
         //Función de Desencriptar. 
         function desencrip(){
+            var img_h = document.getElementById('imgsearch');
+            var txt_h_1 = document.getElementById('Texto_1');
+            var txt_h_2 = document.getElementById('Texto_2');
+            
+            img_h.style.display = 'none';
+            txt_h_1.style.display = 'none';
+            txt_h_2.style.display = 'none';
+            
+
+
             //Esto es para agarrar el mensaje que vamos a desencriptar
             var msj_desencrip = document.getElementById("msj").value;
             
